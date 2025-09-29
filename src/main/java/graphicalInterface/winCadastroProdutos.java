@@ -3,6 +3,7 @@ package graphicalInterface;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.util.Objects;
 
 public class winCadastroProdutos extends JFrame {
 
@@ -34,6 +35,9 @@ public class winCadastroProdutos extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+
+
+
 	public winCadastroProdutos() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 884, 502);
