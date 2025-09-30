@@ -6,20 +6,6 @@ import java.awt.*;
 import java.util.Objects;
 
 public class WinLogin extends JFrame {
-
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    WinLogin frame = new WinLogin() ;
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
     public WinLogin() {
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -32,7 +18,6 @@ public class WinLogin extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-
 
         JButton btnLogin = new JButton("LOGIN");
         btnLogin.setBackground(new Color(102, 204, 102));

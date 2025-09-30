@@ -10,21 +10,7 @@ public class WinPrincipal extends JFrame {
 	@Serial
     private static final long serialVersionUID = 1L;
 
-	/**
-	 * ---> RUn
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					WinPrincipal frame = new WinPrincipal();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * ---> Home
