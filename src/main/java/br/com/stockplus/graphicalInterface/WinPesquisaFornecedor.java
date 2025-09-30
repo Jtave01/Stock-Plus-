@@ -1,4 +1,4 @@
-package graphicalInterface;
+package br.com.stockplus.graphicalInterface;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class winPesquisaFornecedor extends JFrame {
+public class WinPesquisaFornecedor extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -14,26 +14,12 @@ public class winPesquisaFornecedor extends JFrame {
 	private JTextField textField_1;
 	private JTable table;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					winPesquisaFornecedor frame = new winPesquisaFornecedor();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the frame.
 	 */
-	public winPesquisaFornecedor() {
+	public WinPesquisaFornecedor() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 888, 580);
 		contentPane = new JPanel();

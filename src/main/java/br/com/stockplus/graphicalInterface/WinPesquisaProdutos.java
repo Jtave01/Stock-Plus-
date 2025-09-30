@@ -1,4 +1,4 @@
-package graphicalInterface;
+package br.com.stockplus.graphicalInterface;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -6,38 +6,20 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class winPesquisaProdutos extends JFrame {
+public class WinPesquisaProdutos extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
+	//private JTextField textField;
 	private JTextField textField_1;
 	private JTable table;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					winPesquisaProdutos frame = new winPesquisaProdutos();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
 
 
-
-
-	public winPesquisaProdutos() {
+	public WinPesquisaProdutos() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 888, 580);
 		contentPane = new JPanel();
@@ -61,18 +43,18 @@ public class winPesquisaProdutos extends JFrame {
 		lblNewLabel_2.setForeground(new Color(255, 255, 255));
 		lblNewLabel_2.setBounds(65, 147, 119, 16);
 		contentPane.add(lblNewLabel_2);
-		
-		textField = new JTextField();
+
+        JTextField textField = new JTextField();
 		textField.setColumns(10);
 		textField.setBounds(170, 115, 423, 22);
 		contentPane.add(textField);
 		
-		textField_1 = new JTextField();
+		JTextField textField_1 = new JTextField();
 		textField_1.setColumns(10);
 		textField_1.setBounds(170, 147, 252, 22);
 		contentPane.add(textField_1);
 		
-		table = new JTable();
+		JTable table = new JTable();
 		table.setBounds(170, 217, 503, 187);
 		contentPane.add(table);
 		

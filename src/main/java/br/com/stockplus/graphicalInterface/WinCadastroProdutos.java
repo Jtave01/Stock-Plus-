@@ -1,11 +1,10 @@
-package graphicalInterface;
+package br.com.stockplus.graphicalInterface;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.util.Objects;
 
-public class winCadastroProdutos extends JFrame {
+public class WinCadastroProdutos extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -15,22 +14,8 @@ public class winCadastroProdutos extends JFrame {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
+	private JTextField textField_6;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					winCadastroProdutos frame = new winCadastroProdutos();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -38,7 +23,7 @@ public class winCadastroProdutos extends JFrame {
 
 
 
-	public winCadastroProdutos() {
+	public WinCadastroProdutos() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 884, 502);
 		contentPane = new JPanel();
@@ -67,27 +52,27 @@ public class winCadastroProdutos extends JFrame {
 		lblLocalizao.setBounds(196, 282, 114, 16);
 		contentPane.add(lblLocalizao);
 		
-		textField = new JTextField();
+		JTextField textField = new JTextField();
 		textField.setBounds(283, 279, 116, 22);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
-		textField_1 = new JTextField();
+		JTextField textField_1 = new JTextField();
 		textField_1.setColumns(10);
 		textField_1.setBounds(283, 113, 252, 22);
 		contentPane.add(textField_1);
 		
-		textField_2 = new JTextField();
+		JTextField textField_2 = new JTextField();
 		textField_2.setColumns(10);
 		textField_2.setBounds(283, 145, 310, 22);
 		contentPane.add(textField_2);
 		
-		textField_3 = new JTextField();
+		JTextField textField_3 = new JTextField();
 		textField_3.setColumns(10);
 		textField_3.setBounds(283, 250, 116, 22);
 		contentPane.add(textField_3);
 		
-		textField_4 = new JTextField();
+		JTextField textField_4 = new JTextField();
 		textField_4.setColumns(10);
 		textField_4.setBounds(283, 84, 87, 22);
 		contentPane.add(textField_4);
@@ -104,7 +89,7 @@ public class winCadastroProdutos extends JFrame {
 		lblDescrip.setBounds(207, 174, 105, 16);
 		contentPane.add(lblDescrip);
 		
-		textField_5 = new JTextField();
+		JTextField textField_5 = new JTextField();
 		textField_5.setColumns(10);
 		textField_5.setBounds(283, 174, 310, 66);
 		contentPane.add(textField_5);
