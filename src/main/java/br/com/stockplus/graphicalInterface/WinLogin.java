@@ -65,7 +65,7 @@ public class WinLogin extends JFrame {
     private void irParaHome() {
         this.getContentPane().setEnabled(false);
 
-        Timer timer = new Timer(150, e -> {
+        Timer timer = new Timer(50, e -> {
             setVisible(false);
 
             WinPrincipal principal = new WinPrincipal();

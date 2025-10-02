@@ -1,16 +1,12 @@
-package br.com.stockplus.main;
+package br.com.stockplus.run;
 
 import br.com.stockplus.connection.ConnectionUtil;
 import br.com.stockplus.graphicalInterface.WinLogin;
-import org.flywaydb.core.Flyway;
 
 import java.awt.*;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.sql.SQLException;
-import java.util.Properties;
 
-public class Main {
+public class Run {
     public static void main(String[] args) {
 
         try (var connection = ConnectionUtil.getConnection()){
@@ -18,8 +14,6 @@ public class Main {
         }catch (SQLException e){
             e.printStackTrace();
         }
-
-
 
         EventQueue.invokeLater(new Runnable() {
             public void run() {

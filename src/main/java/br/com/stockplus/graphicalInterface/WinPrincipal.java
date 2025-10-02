@@ -1,5 +1,11 @@
 package br.com.stockplus.graphicalInterface;
 
+import br.com.stockplus.graphicalInterface.cadastro.WinCadastroProdutos;
+import br.com.stockplus.graphicalInterface.cadastro.WinCadastrodeFornecedor;
+import br.com.stockplus.graphicalInterface.cadastro.WinCadastrodeUsuario;
+import br.com.stockplus.graphicalInterface.pesquisa.WinPesquisaFornecedor;
+import br.com.stockplus.graphicalInterface.pesquisa.WinPesquisaProdutos;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.Serial;
@@ -12,9 +18,23 @@ public class WinPrincipal extends JFrame {
 
 
 
-	/**
-	 * ---> Home
-	 */
+    private void irParoLogin() {
+        this.getContentPane().setEnabled(false);
+
+        Timer timer = new Timer(50, e -> {
+            setVisible(false);
+
+            WinLogin login = new WinLogin();
+            login.setLocationRelativeTo(null);
+            login.setVisible(true);
+
+            dispose();
+        });
+        timer.setRepeats(false);
+        timer.start();
+    }
+
+	/** ---> Home */
     private void voltarParaHome() {
         try {
             JMenuBar menuBarHome = this.getJMenuBar();
@@ -49,17 +69,15 @@ public class WinPrincipal extends JFrame {
             e.printStackTrace();
         }
     }
-    /**
-     * ---> menu de produtos
-     **/
+    /** ---> Menu produtos */
     private void abrirCadastroProduto() {
         try {
-            /// Salva --->  menuBar principal
+            /// salva menuBar principal
             JMenuBar menuBarHome = this.getJMenuBar();
-            String tituloAtual = this.getTitle();  /// ---> Não usado
-            ///  Cria --> Tela temporaria
+            String tituloAtual = this.getTitle();
+            ///Tela temporaria
             WinCadastroProdutos tempFrame = new WinCadastroProdutos();
-            /// Extrai --> o painel e retornao container principaç
+            /// extrai o painel e retornao container principal
             JPanel painelCadastro = (JPanel) tempFrame.getContentPane();
             this.getContentPane().removeAll();
             this.setLayout(painelCadastro.getLayout());
@@ -113,10 +131,7 @@ public class WinPrincipal extends JFrame {
         }
     }
 
-    /**
-     * ---> menu de fornecedores
-     **/
-
+    /** ---> Menu fornecedor */
     private void abrirCadastroFornecedor(){
         try {
             JMenuBar menuBarHome = this.getJMenuBar();
@@ -172,6 +187,7 @@ public class WinPrincipal extends JFrame {
         }
     }
 
+    /** ---> Menu usuario */
     private void abrirCadastroUsuario(){
         try {
             JMenuBar menuBarHome = this.getJMenuBar();
@@ -202,11 +218,8 @@ public class WinPrincipal extends JFrame {
 	public WinPrincipal() {
 
         setLocationRelativeTo(null);
-
-
 		getContentPane().setBackground(new Color(204, 204, 204));
 		getContentPane().setLayout(null);
-		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(Objects.requireNonNull(WinPrincipal.class.getResource("/imgs/dash_new.png"))));
 		lblNewLabel.setBounds(115, 50, 1151, 466);
@@ -214,29 +227,25 @@ public class WinPrincipal extends JFrame {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1280, 720);
-		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBackground(new Color(0, 102, 153));
 		setJMenuBar(menuBar);
 
 
-        /// ----> Produtos
-		JMenu menuProdutos = new JMenu("PRODUTOS");
-		menuProdutos.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/imgs/ico_produtos.png"))));
-		menuProdutos.setForeground(Color.WHITE);
-		menuProdutos.setFont(new Font("Segoe UI", Font.BOLD, 16));
-		menuBar.add(menuProdutos);
-        JMenuItem subMenuPCadastar = new JMenuItem("Cadastrar Produto");
-        JMenuItem subMenuPPesquisar = new JMenuItem("Pesquisar Produto");
-        menuProdutos.add(subMenuPCadastar);
-        menuProdutos.addSeparator();
-        menuProdutos.add(subMenuPPesquisar);
-        subMenuPCadastar.addActionListener(e -> abrirCadastroProduto());
-        subMenuPPesquisar.addActionListener(e -> abrirPesquisaProdutos());
+        /// --- home
+        JMenu menuHome = new JMenu("HOME");
+        menuHome.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/imgs/ico_sair.png"))));
+        menuHome.setForeground(Color.WHITE);
+        menuHome.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        menuBar.add(menuHome);
+        menuHome.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent e) {
+                voltarParaHome();
+            }
+        });
 
-
-
-        /// -----> Fornecedores
+        /// -----> fornecedores
 		JMenu menuFornecedores = new JMenu("FORNECEDORES");
 		menuFornecedores.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/imgs/ico_fornecedores.png"))));
 		menuFornecedores.setForeground(Color.WHITE);
@@ -250,7 +259,7 @@ public class WinPrincipal extends JFrame {
         subMenuFCadastrar.addActionListener(e -> abrirCadastroFornecedor());
         subMenuFPEsquisar.addActionListener(e -> abrirPesquisaFornecedor());
 
-        /// ----> Usuaarios
+        /// ----> usuaarios
 		JMenu menuUsuarios = new JMenu("USUÁRIOS");
 		menuUsuarios.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/imgs/ico_usuarios.png"))));
 		menuUsuarios.setForeground(Color.WHITE);
@@ -260,20 +269,36 @@ public class WinPrincipal extends JFrame {
         menuUsuarios.add(subMenuUCadastro);
         subMenuUCadastro.addActionListener(e -> abrirCadastroUsuario());
 
+        /// ----> produtos
+        JMenu menuProdutos = new JMenu("PRODUTOS");
+        menuProdutos.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/imgs/ico_produtos.png"))));
+        menuProdutos.setForeground(Color.WHITE);
+        menuProdutos.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        menuBar.add(menuProdutos);
+        JMenuItem subMenuPCadastar = new JMenuItem("Cadastrar Produto");
+        JMenuItem subMenuPPesquisar = new JMenuItem("Pesquisar Produto");
+        menuProdutos.add(subMenuPCadastar);
+        menuProdutos.addSeparator();
+        menuProdutos.add(subMenuPPesquisar);
+        subMenuPCadastar.addActionListener(e -> abrirCadastroProduto());
+        subMenuPPesquisar.addActionListener(e -> abrirPesquisaProdutos());
 
-        /// --- HOME
-        JMenu menuHome = new JMenu("HOME");
-        menuHome.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/imgs/ico_sair.png"))));
-        menuHome.setForeground(Color.WHITE);
-        menuHome.setFont(new Font("Segoe UI", Font.BOLD, 16));
-        menuBar.add(menuHome);
+        menuBar.add(Box.createHorizontalGlue());
 
-        menuHome.addMouseListener(new java.awt.event.MouseAdapter() {
+
+        ///  ---> sair
+        JMenu menuLogin = new JMenu("SAIR");
+        menuLogin.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/imgs/ico_sair.png"))));
+        menuLogin.setForeground(Color.WHITE);
+        menuLogin.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        menuBar.add(menuLogin);
+        menuLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mousePressed(java.awt.event.MouseEvent e) {
-                voltarParaHome();
+                irParoLogin();
             }
         });
 
-	}
+
+    }
 }

@@ -1,4 +1,4 @@
-package br.com.stockplus.graphicalInterface;
+package br.com.stockplus.graphicalInterface.pesquisa;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -6,20 +6,20 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class WinPesquisaProdutos extends JFrame {
+public class WinPesquisaFornecedor extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	//private JTextField textField;
+	private JTextField textField;
 	private JTextField textField_1;
 	private JTable table;
+
+
 
 	/**
 	 * Create the frame.
 	 */
-
-
-	public WinPesquisaProdutos() {
+	public WinPesquisaFornecedor() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 888, 580);
 		contentPane = new JPanel();
@@ -28,33 +28,25 @@ public class WinPesquisaProdutos extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel_1 = new JLabel("PRODUTOS");
+		JLabel lblNewLabel_1 = new JLabel("FORNECEDORES");
 		lblNewLabel_1.setBounds(302, 31, 225, 33);
 		lblNewLabel_1.setForeground(Color.WHITE);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 27));
 		contentPane.add(lblNewLabel_1);
+
 		
-		JLabel lblNewLabel = new JLabel("Nome:");
-		lblNewLabel.setForeground(new Color(255, 255, 255));
-		lblNewLabel.setBounds(122, 118, 106, 16);
-		contentPane.add(lblNewLabel);
-		
-		JLabel lblNewLabel_2 = new JLabel("Código de barra:");
+		JLabel lblNewLabel_2 = new JLabel("CNPJ:");
 		lblNewLabel_2.setForeground(new Color(255, 255, 255));
-		lblNewLabel_2.setBounds(65, 147, 119, 16);
+		lblNewLabel_2.setBounds(128, 150, 56, 16);
 		contentPane.add(lblNewLabel_2);
 
-        JTextField textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(170, 115, 423, 22);
-		contentPane.add(textField);
 		
-		JTextField textField_1 = new JTextField();
+		textField_1 = new JTextField();
 		textField_1.setColumns(10);
 		textField_1.setBounds(170, 147, 252, 22);
 		contentPane.add(textField_1);
 		
-		JTable table = new JTable();
+		table = new JTable();
 		table.setBounds(170, 217, 503, 187);
 		contentPane.add(table);
 		

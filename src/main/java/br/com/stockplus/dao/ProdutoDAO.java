@@ -6,15 +6,12 @@ import br.com.stockplus.entity.ProdutoEntity;
 public class ProdutoDAO {
     public static ProdutoEntity entity = new ProdutoEntity();
 
-    public static void main(String[] args) {
-        entity.getId();
 
-        ProdutoDAO produtoDAO = new ProdutoDAO();
+    private String insert(){
+        ProdutoEntity entity = new ProdutoEntity();
 
-        produtoDAO.update(entity.getId());
-    }
+        var code = entity.getCodIdent();
 
-    private void insert(String code){
         try {
             var connection = ConnectionUtil.getConnection();
             var statemente = connection.prepareStatement("null");
@@ -22,9 +19,11 @@ public class ProdutoDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        return code;
     }
 
-    private void update(Long id){
+    private void update(String code){
         try {
             var connetion = ConnectionUtil.getConnection();
             var statemente = connetion.prepareStatement("null");
@@ -37,6 +36,8 @@ public class ProdutoDAO {
 
     private void delete(String code){
         try {
+            var connection = ConnectionUtil.getConnection();
+            var statemente = connection.prepareStatement("null");
 
         }catch (Exception e){
             e.printStackTrace();
@@ -63,6 +64,8 @@ public class ProdutoDAO {
         try {
             var connection = ConnectionUtil.getConnection();
             var statemente = connection.prepareStatement("null");
+
+
 
         }catch (Exception e){
             e.printStackTrace();
