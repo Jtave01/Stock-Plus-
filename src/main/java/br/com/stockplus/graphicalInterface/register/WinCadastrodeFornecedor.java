@@ -1,4 +1,4 @@
-package br.com.stockplus.graphicalInterface.cadastro;
+package br.com.stockplus.graphicalInterface.register;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

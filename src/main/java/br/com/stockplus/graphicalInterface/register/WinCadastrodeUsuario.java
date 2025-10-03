@@ -1,4 +1,8 @@
-package br.com.stockplus.graphicalInterface.cadastro;
+package br.com.stockplus.graphicalInterface.register;
+
+import br.com.stockplus.dao.UsuarioDAO;
+import br.com.stockplus.entity.RoleEntitty;
+import br.com.stockplus.entity.UsuarioEntity;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -36,6 +40,31 @@ public class WinCadastrodeUsuario extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+
+
+
+    public void insertAux(){
+
+        String senha = String.valueOf(textRepitaSenha.getPassword());
+        String senhaRepete = String.valueOf(textRepitaSenha.getPassword());
+        Long idPermissao = (long) (permicoes.getSelectedIndex() + 1);
+        RoleEntitty role = new RoleEntitty();
+        UsuarioDAO DAO = new UsuarioDAO();
+        role.setId(idPermissao);
+
+        if(!senhaRepete.equals(senha)){
+            JOptionPane.showMessageDialog(null, "As senhas não coincidem !");
+        }
+
+        var entity = new UsuarioEntity();
+        entity.setUsaername(textUsuario.getText());
+        entity.setNome(textNome.getText());
+        entity.setEmail(textEmail.getText());
+        entity.setPassword(String.valueOf(textSenha.getPassword()));
+        entity.setRole(role);
+        DAO.insert(entity);
+
+    }
 	public WinCadastrodeUsuario() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 884, 433);
@@ -131,6 +160,7 @@ public class WinCadastrodeUsuario extends JFrame {
         btnCadastrar.setBackground(new Color(102, 204, 102));
         btnCadastrar.setBounds(428, 355, 135, 32);
         contentPane.add(btnCadastrar);
+        btnCadastrar.addActionListener(e-> insertAux());
 
 	}
 }

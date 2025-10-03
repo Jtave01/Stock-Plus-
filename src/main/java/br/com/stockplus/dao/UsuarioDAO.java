@@ -1,27 +1,36 @@
 package br.com.stockplus.dao;
 
 import br.com.stockplus.connection.ConnectionUtil;
+import br.com.stockplus.entity.RoleEntitty;
 import br.com.stockplus.entity.UsuarioEntity;
-import br.com.stockplus.graphicalInterface.cadastro.WinCadastrodeUsuario;
 
 public class UsuarioDAO {
-    private void insert(UsuarioEntity usuarioEntity){
-        WinCadastrodeUsuario cad = new WinCadastrodeUsuario();
+    public void insert(UsuarioEntity usuarioEntity){
+        var sql = "INSERT INTO usuarios(username, nome, email, password, role_id) values(?, ?, ?, ?, ? )";
+
+        try(var connecction = ConnectionUtil.getConnection();
+            var statemente = connecction.prepareStatement(sql);
+        ) {
+            statemente.setString(1, usuarioEntity.getUsaername());
+            statemente.setString(2, usuarioEntity.getNome());
+            statemente.setString(3, usuarioEntity.getEmail());
+            statemente.setString(4, usuarioEntity.getPassword());
+            statemente.setLong(5, usuarioEntity.getRole().getId());
+
+            statemente.executeUpdate();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new RuntimeException("Erro ao cadastrar usuario !");
+        }
+    }
 
 
-        try {
-            var connecction = ConnectionUtil.getConnection();
-            var statemente = connecction.prepareStatement("null");
-
-            //String username = cad.text;
-            ///String nome = winLogin.getText();
-          //  String email = winLogin.getText();
-           // String password = winLogin.getText();
-        //String confirmarSenha = winLogin.getText();
-
-        //    Long idPermissao = (long) (permicoes.getSelectedIndex() + 1);
-
-            /////
+    public void update(UsuarioEntity usuarioEntity){
+        var sql = "UPDATE ";
+        try(var connection = ConnectionUtil.getConnection();
+            var statemente = connection.prepareStatement(sql);
+        ){
 
 
         }catch (Exception e){
@@ -29,14 +38,80 @@ public class UsuarioDAO {
         }
     }
 
-    private void update(UsuarioEntity usuarioEntity){
-        try{
-            var connection = ConnectionUtil.getConnection();
-            var statemente = connection.prepareStatement("null");
+    public UsuarioEntity findById(Long id){
+        var entity = new UsuarioEntity();
+        var sql = "SELECT * FROM usuarios WHERE id = ?";
+
+        try(var connection = ConnectionUtil.getConnection();
+            var statemente = connection.prepareStatement(sql);
+            ) {
+
+            statemente.setLong(1, id);
+            statemente.executeQuery();
+
+            var resultSet = statemente.getResultSet();
+            if(resultSet.next()){
+                var role = new RoleEntitty();
+                role.setId(resultSet.getLong("role_id"));
+
+                entity.setId(resultSet.getLong("id"));
+                entity.setUsaername(resultSet.getString("username"));
+                entity.setNome(resultSet.getString("nome"));
+                entity.setEmail(resultSet.getString("email"));
+                entity.setPassword(resultSet.getString("password"));
+                entity.setRole(role);
+
+            }
 
 
         }catch (Exception e){
             e.printStackTrace();
         }
+
+        return entity;
     }
+
+    public UsuarioEntity findByUserName(String username){
+        var entitty = new UsuarioEntity();
+        var sql = "SELECT * FROM usuarios WHERE username = ?";
+
+        try(var connection = ConnectionUtil.getConnection();
+            var statemente = connection.prepareStatement(sql)
+        ) {
+            statemente.setString(1, username);
+            statemente.executeQuery();
+            var resultSet = statemente.getResultSet();
+
+
+            while (resultSet.next()){
+                var role = new RoleEntitty();
+                role.setId(resultSet.getLong("role_id"));
+              entitty.setId(resultSet.getLong("id"));
+              entitty.setUsaername(resultSet.getString("username"));
+              entitty.setNome(resultSet.getString("nome"));
+              entitty.setEmail(resultSet.getString("email"));
+              entitty.setPassword(resultSet.getString("password"));
+              entitty.setRole(role);
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return entitty;
+    }
+
 }
+
+
+
+// Aux ---->
+//WinCadastrodeUsuario cad = new WinCadastrodeUsuario();
+//
+//String username = cad.text;
+//String nome = winLogin.getText();
+//  String email = winLogin.getText();
+// String password = winLogin.getText();
+//String confirmarSenha = winLogin.getText();
+
+//Long idPermissao = (long) (permicoes.getSelectedIndex() + 1);

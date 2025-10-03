@@ -1,22 +1,18 @@
 package br.com.stockplus.graphicalInterface;
 
-import br.com.stockplus.graphicalInterface.cadastro.WinCadastroProdutos;
-import br.com.stockplus.graphicalInterface.cadastro.WinCadastrodeFornecedor;
-import br.com.stockplus.graphicalInterface.cadastro.WinCadastrodeUsuario;
-import br.com.stockplus.graphicalInterface.pesquisa.WinPesquisaFornecedor;
-import br.com.stockplus.graphicalInterface.pesquisa.WinPesquisaProdutos;
+import br.com.stockplus.graphicalInterface.register.WinCadastroProdutos;
+import br.com.stockplus.graphicalInterface.register.WinCadastrodeFornecedor;
+import br.com.stockplus.graphicalInterface.register.WinCadastrodeUsuario;
+import br.com.stockplus.graphicalInterface.search.WinPesquisaFornecedor;
+import br.com.stockplus.graphicalInterface.search.WinPesquisaProdutos;
+import br.com.stockplus.graphicalInterface.search.WinPesquisaUsuario;
+import br.com.stockplus.graphicalInterface.update.WinAtualizarUsuario;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.Serial;
 import java.util.Objects;
 
 public class WinPrincipal extends JFrame {
-
-	@Serial
-    private static final long serialVersionUID = 1L;
-
-
 
     private void irParoLogin() {
         this.getContentPane().setEnabled(false);
@@ -32,6 +28,76 @@ public class WinPrincipal extends JFrame {
         });
         timer.setRepeats(false);
         timer.start();
+    }
+
+    private void abrirAtuaulizarUsuario(){
+        try {
+            JMenuBar menuBarHome = this.getJMenuBar();
+            String titulo = this.getTitle();
+
+            WinAtualizarUsuario tempFrame = new WinAtualizarUsuario();
+            JPanel painelHome = (JPanel) tempFrame.getContentPane();
+            this.getContentPane().removeAll();
+            this.setLayout(painelHome.getLayout());
+
+
+            while (painelHome.getComponentCount() > 0 ){
+                Component comp = painelHome.getComponent(0);
+                painelHome.remove(comp);
+                this.getContentPane().add(comp);
+            }
+
+            this.getContentPane().setBackground(painelHome.getBackground());
+
+            this.setJMenuBar(menuBarHome);
+            this.setTitle("Atualizar usuario");
+            this.revalidate();
+            this.repaint();
+            tempFrame.dispose();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this,
+                    "Erro: " + e.getMessage(),
+                    "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }
+
+    private void abrirPesquisarUsuario(){
+        try {
+            JMenuBar menuBarHome = this.getJMenuBar();
+            String titulo = this.getTitle();
+
+            WinPesquisaUsuario tempFrame = new WinPesquisaUsuario();
+            JPanel painelHome = (JPanel) tempFrame.getContentPane();
+            this.getContentPane().removeAll();
+            this.setLayout(painelHome.getLayout());
+
+
+            while (painelHome.getComponentCount() > 0 ){
+                Component comp = painelHome.getComponent(0);
+                painelHome.remove(comp);
+                this.getContentPane().add(comp);
+            }
+
+            this.getContentPane().setBackground(painelHome.getBackground());
+
+            this.setJMenuBar(menuBarHome);
+            this.setTitle("Atualizar usuario");
+            this.revalidate();
+            this.repaint();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this,
+                    "Erro: " + e.getMessage(),
+                    "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
     }
 
 	/** ---> Home */
@@ -77,7 +143,7 @@ public class WinPrincipal extends JFrame {
             String tituloAtual = this.getTitle();
             ///Tela temporaria
             WinCadastroProdutos tempFrame = new WinCadastroProdutos();
-            /// extrai o painel e retornao container principal
+            /// extrai o painel e retorna o container principal
             JPanel painelCadastro = (JPanel) tempFrame.getContentPane();
             this.getContentPane().removeAll();
             this.setLayout(painelCadastro.getLayout());
@@ -268,6 +334,14 @@ public class WinPrincipal extends JFrame {
         JMenuItem subMenuUCadastro = new JMenuItem("Cadastro de usuarios");
         menuUsuarios.add(subMenuUCadastro);
         subMenuUCadastro.addActionListener(e -> abrirCadastroUsuario());
+        menuUsuarios.addSeparator();
+        JMenuItem subMenuUAtualizar = new JMenuItem("Atualizar usuario");
+        menuUsuarios.add(subMenuUAtualizar);
+        subMenuUAtualizar.addActionListener(e -> abrirAtuaulizarUsuario());
+        menuUsuarios.addSeparator();
+        JMenuItem subMenuUPesquisa = new JMenuItem("Pesquisa Usuario");
+        menuUsuarios.add(subMenuUPesquisa);
+        subMenuUPesquisa.addActionListener(e -> abrirPesquisarUsuario());
 
         /// ----> produtos
         JMenu menuProdutos = new JMenu("PRODUTOS");
