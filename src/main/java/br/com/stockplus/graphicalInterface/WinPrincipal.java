@@ -1,5 +1,6 @@
 package br.com.stockplus.graphicalInterface;
 
+import br.com.stockplus.graphicalInterface.controllClasse.SessionManneger;
 import br.com.stockplus.graphicalInterface.register.WinCadastroProdutos;
 import br.com.stockplus.graphicalInterface.register.WinCadastrodeFornecedor;
 import br.com.stockplus.graphicalInterface.register.WinCadastrodeUsuario;
@@ -333,15 +334,37 @@ public class WinPrincipal extends JFrame {
 		menuBar.add(menuUsuarios);
         JMenuItem subMenuUCadastro = new JMenuItem("Cadastro de usuarios");
         menuUsuarios.add(subMenuUCadastro);
-        subMenuUCadastro.addActionListener(e -> abrirCadastroUsuario());
+        subMenuUCadastro.addActionListener(e ->{
+            if(SessionManneger.isAdmin()){
+                abrirCadastroUsuario();
+            }else{
+                JOptionPane.showMessageDialog(null,"Permição negada");
+            }
+
+        } );
         menuUsuarios.addSeparator();
         JMenuItem subMenuUAtualizar = new JMenuItem("Atualizar usuario");
         menuUsuarios.add(subMenuUAtualizar);
-        subMenuUAtualizar.addActionListener(e -> abrirAtuaulizarUsuario());
+        subMenuUAtualizar.addActionListener(e ->{
+            if(SessionManneger.isAdmin()){
+                abrirAtuaulizarUsuario();
+            }else{
+                JOptionPane.showMessageDialog(null,"Permição negada");
+            }
+
+        } );
         menuUsuarios.addSeparator();
         JMenuItem subMenuUPesquisa = new JMenuItem("Pesquisa Usuario");
         menuUsuarios.add(subMenuUPesquisa);
-        subMenuUPesquisa.addActionListener(e -> abrirPesquisarUsuario());
+        subMenuUPesquisa.addActionListener(e ->{
+
+            if(SessionManneger.isAdmin()){
+                abrirPesquisarUsuario();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Permição negada");
+            }
+        });
 
         /// ----> produtos
         JMenu menuProdutos = new JMenu("PRODUTOS");

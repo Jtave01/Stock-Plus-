@@ -3,10 +3,16 @@ package br.com.stockplus.dao;
 import br.com.stockplus.connection.ConnectionUtil;
 import br.com.stockplus.entity.RoleEntitty;
 import br.com.stockplus.entity.UsuarioEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import javax.swing.*;
 
 public class UsuarioDAO {
     public void insert(UsuarioEntity usuarioEntity){
         var sql = "INSERT INTO usuarios(username, nome, email, password, role_id) values(?, ?, ?, ?, ? )";
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String senhaCripto = encoder.encode(usuarioEntity.getPassword());
 
         try(var connecction = ConnectionUtil.getConnection();
             var statemente = connecction.prepareStatement(sql);
@@ -14,7 +20,7 @@ public class UsuarioDAO {
             statemente.setString(1, usuarioEntity.getUsaername());
             statemente.setString(2, usuarioEntity.getNome());
             statemente.setString(3, usuarioEntity.getEmail());
-            statemente.setString(4, usuarioEntity.getPassword());
+            statemente.setString(4, senhaCripto);
             statemente.setLong(5, usuarioEntity.getRole().getId());
 
             statemente.executeUpdate();
@@ -99,6 +105,44 @@ public class UsuarioDAO {
         }
 
         return entitty;
+    }
+
+    public UsuarioEntity findByLogin(String user, String password){
+        var encoder = new BCryptPasswordEncoder();
+        var sql = "SELECT * FROM usuarios WHERE username = ? ";
+
+        try(var connection = ConnectionUtil.getConnection();
+            var statemente = connection.prepareStatement(sql);
+          ) {
+            statemente.setString(1, user);
+            statemente.executeQuery();
+            var resultSet = statemente.getResultSet();
+
+            if (resultSet.next()){
+                String senhaCript = resultSet.getString("password");
+                if(encoder.matches(password,senhaCript )){
+
+                    var entitty = new UsuarioEntity();
+                    entitty.setId(resultSet.getLong("id"));
+                    entitty.setUsaername(resultSet.getString("username"));
+                    entitty.setNome(resultSet.getString("nome"));
+
+                    var role = new RoleEntitty();
+                    role.setId(resultSet.getLong("role_id"));
+                    entitty.setRole(role);
+
+                    return entitty;
+                }else{
+                    return  null;
+                }
+            }
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 }
