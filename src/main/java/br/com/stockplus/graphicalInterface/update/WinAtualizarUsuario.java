@@ -28,7 +28,6 @@ public class WinAtualizarUsuario extends JFrame {
     public JButton btnAtualizar;
     public JButton btnCancelar;
 
-    private UsuarioEntity usuarioCarregado;
 
     public WinAtualizarUsuario() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -183,15 +182,6 @@ public class WinAtualizarUsuario extends JFrame {
 
     }
 
-    private void habilitarCampos(boolean habilitar) {
-        textUsuario.setEnabled(habilitar);
-        textNome.setEnabled(habilitar);
-        textEmail.setEnabled(habilitar);
-        textSenha.setEnabled(habilitar);
-        textRepitaSenha.setEnabled(habilitar);
-        permicoes.setEnabled(habilitar);
-        btnAtualizar.setEnabled(habilitar);
-    }
 
     private void limparCampos() {
         textId.setText("");

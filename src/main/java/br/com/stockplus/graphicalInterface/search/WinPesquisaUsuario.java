@@ -25,6 +25,36 @@ public class WinPesquisaUsuario extends JFrame {
     public JButton btnBuscar;
     public JButton btnLimpar;
 
+    private void buscarUsuario() {
+        var DAO = new UsuarioDAO();
+        String username = textUsuario.getText();
+        UsuarioEntity usuario = DAO.findByUserName(username);
+        String role = usuario.getRole().getId() == 1L ? "Administrador" : "Usuário";
+
+        textId.setText(String.valueOf(Long.parseLong(String.valueOf(usuario.getId()))));
+        textUsuario.setText(usuario.getUsaername());
+        textNome.setText(usuario.getNome());
+        textEmail.setText(usuario.getEmail());
+        textPermissao.setText(role);
+
+
+        boolean habilitar = true;
+        textUsuario.setEnabled(habilitar);
+        textNome.setEnabled(habilitar);
+        textEmail.setEnabled(habilitar);
+        textPermissao.setEnabled(habilitar);
+
+
+    }
+
+    private void limparCampos() {
+        textId.setText("");
+        textUsuario.setText("");
+        textNome.setText("");
+        textEmail.setText("");
+        textPermissao.setText("");
+    }
+
     public WinPesquisaUsuario() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 884, 430);
@@ -130,37 +160,6 @@ public class WinPesquisaUsuario extends JFrame {
         btnLimpar.setBounds(350, 345, 135, 32);
         contentPane.add(btnLimpar);
         btnLimpar.addActionListener(e -> limparCampos());
-    }
-
-
-    private void buscarUsuario() {
-        var DAO = new UsuarioDAO();
-        String username = textUsuario.getText();
-        UsuarioEntity usuario = DAO.findByUserName(username);
-        String role = usuario.getRole().getId() == 1L ? "Administrador" : "Usuário";
-
-        textId.setText(String.valueOf(Long.parseLong(String.valueOf(usuario.getId()))));
-        textUsuario.setText(usuario.getUsaername());
-        textNome.setText(usuario.getNome());
-        textEmail.setText(usuario.getEmail());
-        textPermissao.setText(role);
-
-
-        boolean habilitar = true;
-        textUsuario.setEnabled(habilitar);
-        textNome.setEnabled(habilitar);
-        textEmail.setEnabled(habilitar);
-        textPermissao.setEnabled(habilitar);
-
-
-    }
-
-    private void limparCampos() {
-        textId.setText("");
-        textUsuario.setText("");
-        textNome.setText("");
-        textEmail.setText("");
-        textPermissao.setText("");
     }
 
 }

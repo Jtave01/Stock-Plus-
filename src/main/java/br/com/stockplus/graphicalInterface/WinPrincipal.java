@@ -10,6 +10,7 @@ import br.com.stockplus.graphicalInterface.search.WinPesquisaUsuario;
 import br.com.stockplus.graphicalInterface.update.WinAtualizarUsuario;
 
 import javax.swing.*;
+import javax.swing.event.MouseInputListener;
 import java.awt.*;
 import java.util.Objects;
 
@@ -331,6 +332,11 @@ public class WinPrincipal extends JFrame {
 		menuUsuarios.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/imgs/ico_usuarios.png"))));
 		menuUsuarios.setForeground(Color.WHITE);
 		menuUsuarios.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        menuUsuarios.addActionListener(e -> {
+            if(SessionManneger.isAdmin() == false){
+                JOptionPane.showMessageDialog(null, "Permição negada");
+            }
+        });
 		menuBar.add(menuUsuarios);
         JMenuItem subMenuUCadastro = new JMenuItem("Cadastro de usuarios");
         menuUsuarios.add(subMenuUCadastro);

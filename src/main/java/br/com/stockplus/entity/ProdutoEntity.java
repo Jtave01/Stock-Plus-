@@ -11,8 +11,8 @@ public class ProdutoEntity {
     private String codIdent;
     private String nome;
     private String descricao;
-    private int quantidade;
-    private double preco;
+    private Integer quantidade;
+    private Double preco;
     private String localizacao;
     private FornecedorEntity fornecedor;
     private Date dataInsercao;

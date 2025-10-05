@@ -43,7 +43,7 @@ public class WinCadastrodeUsuario extends JFrame {
 
 
 
-    public void insertAux(){
+    public void cadastroAux(){
 
         String senha = String.valueOf(textRepitaSenha.getPassword());
         String senhaRepete = String.valueOf(textRepitaSenha.getPassword());
@@ -64,6 +64,14 @@ public class WinCadastrodeUsuario extends JFrame {
         entity.setRole(role);
         DAO.insert(entity);
 
+    }
+
+    public void limpar(){
+        textNome.setText("");
+        textUsuario.setText("");
+        textEmail.setText("");
+        textSenha.setText("");
+        textRepitaSenha.setText("");
     }
 	public WinCadastrodeUsuario() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -160,7 +168,7 @@ public class WinCadastrodeUsuario extends JFrame {
         btnCadastrar.setBackground(new Color(102, 204, 102));
         btnCadastrar.setBounds(428, 355, 135, 32);
         contentPane.add(btnCadastrar);
-        btnCadastrar.addActionListener(e-> insertAux());
+        btnCadastrar.addActionListener(e-> cadastroAux());
 
 	}
 }

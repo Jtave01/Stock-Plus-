@@ -1,5 +1,8 @@
 package br.com.stockplus.graphicalInterface.register;
 
+import br.com.stockplus.dao.FornecedorDAO;
+import br.com.stockplus.entity.FornecedorEntity;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -41,9 +44,35 @@ public class WinCadastrodeFornecedor extends JFrame {
     public JButton btnCadastrar;
     public JButton btnCancelar;
 
-    /**
-     * Create the frame.
-     */
+    private void cadastroAux(){
+
+        FornecedorEntity entity = new FornecedorEntity();
+
+        entity.setCnpj(textCnpj.getText());
+        entity.setRazaoSocial(textRazaoSocial.getText());
+        entity.setEmail(textEmail.getText());
+        entity.setEndereco(textEndereco.getText());
+        entity.setNumeroEndereco(textNumero.getText());
+        entity.setTelefone(textTelefone.getText());
+        entity.setBairroEndereco(textBairro.getText());
+        entity.setCidade(textCidade.getText());
+        entity.setUf(textUf.getText());
+
+        FornecedorDAO DAO = new FornecedorDAO();
+
+        DAO.insert(entity);
+
+    }
+    private void limparCampos() {
+        textCnpj.setText("");
+        textRazaoSocial.setText("");
+        textEmail.setText("");
+        textEndereco.setText("");
+        textNumero.setText("");
+        textTelefone.setText("");
+        textBairro.setText("");
+        textCidade.setText("");
+    }
     public WinCadastrodeFornecedor() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 884, 502);
@@ -179,6 +208,12 @@ public class WinCadastrodeFornecedor extends JFrame {
         btnCadastrar.setForeground(new Color(248, 248, 255));
         btnCadastrar.setBackground(new Color(102, 204, 102));
         btnCadastrar.setBounds(431, 420, 135, 32);
+        btnCadastrar.addActionListener(e ->{
+                    cadastroAux();
+                    limparCampos();
+        } );
         contentPane.add(btnCadastrar);
+
+
     }
 }

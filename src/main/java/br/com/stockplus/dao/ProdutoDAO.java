@@ -9,12 +9,12 @@ public class ProdutoDAO {
 
     private String insert(){
         ProdutoEntity entity = new ProdutoEntity();
-
+        var sql = "INSERT INTO produtos() values()  ";
         var code = entity.getCodIdent();
 
-        try {
-            var connection = ConnectionUtil.getConnection();
+        try(var connection = ConnectionUtil.getConnection();
             var statemente = connection.prepareStatement("null");
+        ) {
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -24,9 +24,9 @@ public class ProdutoDAO {
     }
 
     private void update(String code){
-        try {
-            var connetion = ConnectionUtil.getConnection();
+        try(var connetion = ConnectionUtil.getConnection();
             var statemente = connetion.prepareStatement("null");
+        ) {
 
 
         }catch (Exception e){
@@ -35,9 +35,9 @@ public class ProdutoDAO {
     }
 
     private void delete(String code){
-        try {
-            var connection = ConnectionUtil.getConnection();
+        try(var connection = ConnectionUtil.getConnection();
             var statemente = connection.prepareStatement("null");
+        ) {
 
         }catch (Exception e){
             e.printStackTrace();
@@ -47,9 +47,9 @@ public class ProdutoDAO {
     private ProdutoEntity readOneProduc(String code){
         ProdutoEntity entity = new ProdutoEntity();
 
-        try {
-            var connection = ConnectionUtil.getConnection();
+        try(var connection = ConnectionUtil.getConnection();
             var statemente = connection.prepareStatement("null");
+        ) {
 
         }catch (Exception e){
             e.printStackTrace();
@@ -61,9 +61,9 @@ public class ProdutoDAO {
     private ProdutoEntity readAlL(){
         ProdutoEntity entity = new ProdutoEntity();
 
-        try {
-            var connection = ConnectionUtil.getConnection();
+        try(var connection = ConnectionUtil.getConnection();
             var statemente = connection.prepareStatement("null");
+        ) {
 
 
 
